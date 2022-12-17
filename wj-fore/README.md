@@ -1,6 +1,6 @@
 # wj-fore
 
-> A Vue.js project
+> 白卷项目（WhiteJotter）的前端部分
 
 ## Build Setup
 
