@@ -3,29 +3,20 @@ package icu.cellcode.whitejotter.controller;
 
 import icu.cellcode.whitejotter.entity.ResultSet;
 import icu.cellcode.whitejotter.entity.User;
+import icu.cellcode.whitejotter.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/api/login")
 public class LoginController {
+    @Autowired
+    LoginService loginService;
     @CrossOrigin
-    @PostMapping(value = "api/login")
+    @PostMapping("/login")
     @ResponseBody
     public ResultSet login(@RequestBody User user) {
-        ResultSet rs = new ResultSet();
-        if (user.getUsername() != null
-                && user.getUsername().equals("admin")
-                && user.getPassword() != null
-                && user.getPassword().equals("123456")
-        ) {
-            rs.setCode(200);
-        } else {
-            rs.setCode(400);
-            rs.setMessage("用户名或密码错误。");
-        }
-        return rs;
+        return loginService.login(user);
     }
 }
